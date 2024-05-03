@@ -22,6 +22,7 @@ The search functionality should:
 The search functionality should NOT:
 
 - return hallucinated non-existing R packages
+- return stochastic results. The same query on the same version of the engine should return the same results
 
 ## Deployment
 
