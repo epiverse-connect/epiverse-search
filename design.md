@@ -17,7 +17,7 @@ These user stories have been collected at:
 The search functionality should:
 
 - take natural language text description of the task the user is trying to perform (e.g., "I want to estimate the risk of a dengue outbreak in Colombia in the next 3 months")
-- return a (list of) valid R package(s) performing the described task, taken from the CRAN Task View in Epidemiology 
+- return a (list of) valid R package(s) performing the described task, taken from the CRAN Task View in Epidemiology
 
 The search functionality should NOT:
 
@@ -27,6 +27,9 @@ The search functionality should NOT:
 ## Deployment
 
 This will be part of the https://epiverse-trace.github.io/ website.
+As a consequence, the final user interface should be a webapp, embeddable in a simple static website hosted on GitHub Pages.
+
+The engine also needs to be redeployed every week, or at least every month, using the new data (new packages and new data about exisiting packages).
 
 ## Out of scope
 
