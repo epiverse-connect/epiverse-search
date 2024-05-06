@@ -37,3 +37,7 @@ The engine also needs to be redeployed every week, or at least every month, usin
 
 - The search results are based EXCLUSIVELY on match to the described task. Software quality is not taken into account in result rankings
 
+## Previous and related work
+
+- https://github.com/epiverse-trace/llm-guidance
+
