@@ -4,8 +4,8 @@
 
 This work is mostly targeted at the following persona, with the following stories:
 
-- As a PEI tool implementer, I want to find out if there is an R package to do this specific epidemiological analysis task I have in mind. This allows me to quickly find the right tool for the job.
-- As a PEI tool creator, I want to find out if there is an R package to do this specific epidemiological analysis task I have in mind. This prevents me from reinventing the wheel and increasing the ecosystem fragmentation.
+- As a Pandemic & Epidemic Intelligence tool implementer, I want to find out if there is an R package to do this specific epidemiological analysis task I have in mind. This allows me to quickly find the right tool for the job.
+- As a Pandemic & Epidemic Intelligence tool creator, I want to find out if there is an R package to do this specific epidemiological analysis task I have in mind. This prevents me from reinventing the wheel and increasing the ecosystem fragmentation.
 
 These user stories have been collected at:
 
