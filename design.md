@@ -31,7 +31,7 @@ The search functionality should NOT:
 This will be part of the https://epiverse-trace.github.io/ website.
 As a consequence, the final user interface should be a webapp, embeddable in a simple static website hosted on GitHub Pages.
 
-The engine also needs to be redeployed every week, or at least every month, using the new data (new packages and new data about exisiting packages).
+The engine also needs to be redeployed every week, or at least every month, using the new data (new packages and new data about existing packages).
 
 ## Out of scope
 
