@@ -18,11 +18,13 @@ The search functionality should:
 
 - take natural language text description of the task the user is trying to perform (e.g., "I want to estimate the risk of a dengue outbreak in Colombia in the next 3 months")
 - return a (list of) valid R package(s) performing the described task, taken from the CRAN Task View in Epidemiology
+- order result by match to the search query
 
 The search functionality should NOT:
 
 - return hallucinated non-existing R packages
 - return stochastic results. The same query on the same version of the engine should return the same results
+- return irrelevant results. There needs to be a threshold of relevance for a package to be returned
 
 ## Deployment
 
