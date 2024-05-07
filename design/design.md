@@ -26,6 +26,10 @@ The search functionality should NOT:
 - return stochastic results. The same query on the same version of the engine should return the same results
 - return irrelevant results. There needs to be a threshold of relevance for a package to be returned
 
+## Architecture
+
+![](search_diagram.drawio.png)
+
 ## Deployment
 
 This will be part of the https://epiverse-trace.github.io/ website.
