@@ -28,7 +28,7 @@ The search functionality should NOT:
 
 ## Architecture
 
-![](search_diagram.drawio.png)
+![](architecture.png)
 
 ## Deployment
 
