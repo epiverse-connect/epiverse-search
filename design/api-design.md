@@ -18,7 +18,6 @@ API calls are contained to one call per query. Front-end calls could look like `
   "query": "how to estimate outbreak probability of dengue in colombia in next three months",
   "filter": "epiverse",
   "response": {
-    "text": "In order to estimate the outbreak probability of dengue in Colombia in the next three months, you can use the following Epiverse packages",
     "results": [
       {
         "package": "epidemics",
