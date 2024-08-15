@@ -1,19 +1,15 @@
 library(pkgsearch)
 library(gh)
-
+pak::pak("Genentech/rd2markdown")
 ## Helper function to ensure dirs exist
 write_content_to_file <- function(content, file_path, is_binary = FALSE) {
-  dir_path <- dirname(file_path)
-
-  # If dir doesn't exist, create it
-  if (!dir.exists(dir_path)) {
-    dir.create(dir_path, recursive = TRUE)
-  }
-
   # Write the content to the file while checking for binaryness
-  if (is_binary) {
-    writeBin(content, file_path)
-  } else {
+  if (!is_binary) {
+    dir_path <- dirname(file_path)
+    # If dir doesn't exist, create it
+    if (!dir.exists(dir_path)) {
+      dir.create(dir_path, recursive = TRUE)
+    }
     writeLines(rawToChar(content), file_path)
   }
 }
@@ -47,10 +43,10 @@ output_file <- "Epidemiology.md"
 download.file(ctv_url, output_file)
 
 # Read the CTV file and extract package names
-pkgs <- read.ctv("Epidemiology.md") |>
-  pluck("packagelist", "name") |>
-  pkgsearch::cran_packages() |> 
-  head(3)
+pkgs <- ctv::read.ctv("Epidemiology.md") |>
+  purrr::pluck("packagelist", "name") |>
+  pkgsearch::cran_packages() |>
+  tail(3)
 
 owner <- "cran"
 
@@ -91,7 +87,7 @@ apply(pkgs, 1, FUN = function(pkg) {
         # Determine if the file should be written as binary
         is_binary <- is_binary_file(target_path)
 
-        # Save the content to a file with our helper function
+        # Save the .Rd content to a file with our helper function
         # The helper ensures the paths exist prior to saving
         tryCatch(write_content_to_file(file_content, target_path, is_binary),
           error = function(e) {
@@ -99,6 +95,22 @@ apply(pkgs, 1, FUN = function(pkg) {
             cat("Error message:", e$message, "\n")
           }
         )
+
+        if (!is_binary && grepl("\\.Rd$", target_path, ignore.case = TRUE)) {
+          # Convert Rd to markdown
+          rd <- rd2markdown::get_rd(file = target_path)
+          writeLines(
+            rd2markdown::rd2markdown(rd),
+            gsub("\\.Rd$", ".md", target_path) # Replace the extension name
+          )
+          # Remove the original Rd file
+          tryCatch(unlink(target_path),
+            error = function(e) {
+              cat("Error removing file:", target_path, "\n")
+              cat("Error message:", e$message, "\n")
+            }
+          )
+        }
 
         cat("File downloaded and saved as", target_path, "\n")
       } else {
