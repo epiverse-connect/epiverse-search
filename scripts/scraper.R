@@ -117,6 +117,6 @@ lapply(pkgs, FUN = function(pkg) {
       }
     }
   } else {
-    cat("No matching file found for path:", target_path, "\n")
+    cat("No matching file found for package:", pkg, "\n")
   }
 })
