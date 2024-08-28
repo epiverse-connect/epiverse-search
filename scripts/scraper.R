@@ -45,18 +45,17 @@ download.file(ctv_url, output_file)
 # Read the CTV file and extract package names
 pkgs <- ctv::read.ctv("Epidemiology.md") |>
   purrr::pluck("packagelist", "name") |>
-  pkgsearch::cran_packages() |>
   tail(3)
 
 owner <- "cran"
 
 # Vectorized approach to get title and description of each package
-apply(pkgs, 1, FUN = function(pkg) {
+lapply(pkgs, FUN = function(pkg) {
   # Use the gh function to list all files in the repository
   files <- gh::gh(
     "GET /repos/:owner/:repo/git/trees/HEAD?recursive=1",
     owner = owner,
-    repo = pkg$Package
+    repo = pkg
   )
 
   # Extract the file paths
@@ -71,13 +70,13 @@ apply(pkgs, 1, FUN = function(pkg) {
     for (i in seq_along(matching_files)) {
       if (files$tree[matched_regex][[i]]$type == "blob") {
         file_info <- files$tree[matched_regex][[i]]
-        target_path <- sprintf("sources/%s/%s", pkg$Package, file_info$path)
+        target_path <- sprintf("sources/%s/%s", pkg, file_info$path)
 
         # Use the gh function to get the blob content
         blob <- gh::gh(
           "GET /repos/:owner/:repo/git/blobs/:sha",
           owner = owner,
-          repo = pkg$Package,
+          repo = pkg,
           sha = file_info$sha
         )
 
