@@ -57,20 +57,20 @@ lapply(pkgs, FUN = function(pkg) {
     owner = owner,
     repo = pkg
   )
-  
+
   # Extract the file paths
   file_paths <- vapply(files$tree, function(x) x$path, character(1))
-  
+
   # Find the file that matches the target path
   matched_regex <- grep(file_paths, pattern = "^(man/|vignettes/)")
   matching_files <- file_paths[matched_regex]
-  
+
   # If matching files are found, download content of each file
   if (length(matching_files) > 0) {
     filteredFiles <- Filter(function(x) x$type == "blob", files$tree[matched_regex])
-    lapply(filteredFiles, FUN = function (file) {
+    lapply(filteredFiles, FUN = function(file) {
       target_path <- sprintf("sources/%s/%s", pkg, file$path)
-      
+
       # Use the gh function to get the blob content
       blob <- gh::gh(
         "GET /repos/:owner/:repo/git/blobs/:sha",
@@ -78,22 +78,22 @@ lapply(pkgs, FUN = function(pkg) {
         repo = pkg,
         sha = file$sha
       )
-      
+
       # Decode the base64 content
       file_content <- base64enc::base64decode(blob$content)
-      
+
       # Determine if the file should be written as binary
       is_binary <- is_binary_file(target_path)
-      
+
       # Save the .Rd content to a file with our helper function
       # The helper ensures the paths exist prior to saving
       tryCatch(write_content_to_file(file_content, target_path, is_binary),
-               error = function(e) {
-                 cat("Error downloading or saving file:", target_path, "\n")
-                 cat("Error message:", e$message, "\n")
-               }
+        error = function(e) {
+          cat("Error downloading or saving file:", target_path, "\n")
+          cat("Error message:", e$message, "\n")
+        }
       )
-      
+
       if (!is_binary && grepl("\\.Rd$", target_path, ignore.case = TRUE)) {
         # Convert Rd to markdown
         rd <- rd2markdown::get_rd(file = target_path)
@@ -103,16 +103,38 @@ lapply(pkgs, FUN = function(pkg) {
         )
         # Remove the original Rd file
         tryCatch(unlink(target_path),
-                 error = function(e) {
-                   cat("Error removing file:", target_path, "\n")
-                   cat("Error message:", e$message, "\n")
-                 }
+          error = function(e) {
+            cat("Error removing file:", target_path, "\n")
+            cat("Error message:", e$message, "\n")
+          }
         )
       }
-      
-      cat("File downloaded and saved as", target_path, "\n")  
+
+      cat("File downloaded and saved as", target_path, "\n")
     })
   } else {
     cat("No matching file found for package:", pkg, "\n")
   }
 })
+
+# Define the path to the sources/package/ directory
+sources_package_path <- "sources"
+
+# List all subdirectories within sources/package/
+packages <- list.dirs(sources_package_path, full.names = TRUE, recursive = FALSE)
+
+# Iterate over each package directory
+for (pkg in packages) {
+  man_path <- file.path(pkg, "man")
+
+  # Check if the man/ directory exists
+  if (dir.exists(man_path)) {
+    # List all subdirectories within man/
+    man_subdirs <- list.dirs(man_path, full.names = TRUE, recursive = FALSE)
+
+    # Remove each subdirectory within man/
+    for (subdir in man_subdirs) {
+      unlink(subdir, recursive = TRUE)
+    }
+  }
+}
