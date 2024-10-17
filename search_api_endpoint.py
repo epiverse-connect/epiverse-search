@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Query
 from typing import List
 from elasticsearch import Elasticsearch
 from pydantic import BaseModel
@@ -22,11 +22,10 @@ class UserQuery(BaseModel):
     query_user: str
     
 # Define a route for the API
-@app.post("/api/")
-def get_data(input:UserQuery):
+@app.get("/api/")
+def get_data(query:str = Query(..., description="User query string")):
     # Python logic or function call here
 
-    query = input.query_user
     inputs = tokenizer(query, return_tensors='pt', padding=True, truncation=True)
     
     with torch.no_grad():
@@ -59,4 +58,3 @@ def get_data(input:UserQuery):
 
     # Return the data as a JSON response
     return case_list
-
