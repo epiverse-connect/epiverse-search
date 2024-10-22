@@ -1,0 +1,18 @@
+# Step 1: Usepytorch base image
+FROM api-demo:arm64-3 
+
+# Step 2: Set the working directory
+#WORKDIR ___PROJECTS/EPIVERSE/search/
+
+# Step 3: Copy the Python script into the container
+
+COPY requirements.txt .
+COPY search_elastic_index_update.py .
+
+#RUN pip install --default-timeout=900 --no-cache-dir -r requirements.txt
+RUN pip install --default-timeout=900 --no-cache-dir -r requirements.txt
+
+
+# Step 4: Command to run the Python script
+#EXPOSE 9200
+CMD ["python", "search_elastic_index_update.py"]
