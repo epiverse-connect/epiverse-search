@@ -8,10 +8,9 @@ b.	Pytorch : docker pull pytorch/pytorch:2.5.0-cuda12.4-cudnn9-runtime [This is 
 3.	Create a directory and copy all the Github files into this directory.
 4.	Download “sources.zip” file containing all the text data and add it to the directory
 5.	Use the following code to create the docker image:
-_  docker buildx build --platform linux/arm64 -f Dockerfile-poc-api -t api-demo:arm64-3 .
+  docker buildx build --platform linux/arm64 -f Dockerfile-poc-api -t api-demo:arm64-3 .
   docker buildx build --platform linux/arm64 -f Dockerfile-poc-elasticsearch -t populate-index:v1.0 .
-_
 6.	Run the docker container to update elasticsearch index:
-_  docker run  --name cont-elastic-1 -p 9200:9200 populate-index:v1.0
-  docker run  --name cont-elastic-1 -p 8000:8000 api-demo:arm64-3_
+    docker run  --name cont-elastic-1 -p 9200:9200 populate-index:v1.0
+  _docker run  --name cont-elastic-1 -p 8000:8000 api-demo:arm64-3_
 
