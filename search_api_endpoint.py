@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Query
 from typing import List
 from elasticsearch import Elasticsearch
 from pydantic import BaseModel
@@ -9,8 +9,19 @@ import torch
 # Load the BERT tokenizer and model
 
 # Initialize Elasticsearch client
-es = Elasticsearch("http://localhost:9200")
+# es = Elasticsearch("http://127.0.0.1:9200")
 
+es = Elasticsearch("http://host.docker.internal:9200")
+
+
+
+
+if es.ping():
+    print("Successfully connected to Elasticsearch")
+else:
+    print("Elasticsearch connection failed")
+    
+    
 # Initialize tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained('distilbert/distilbert-base-uncased')
 # Initialize the FastAPI application
@@ -22,11 +33,15 @@ class UserQuery(BaseModel):
     query_user: str
     
 # Define a route for the API
-@app.post("/api/")
-def get_data(input:UserQuery):
+@app.get("/api/")
+# def get_data(input:UserQuery):
+#     # Python logic or function call here
+
+#     query = input.query_user
+
+def get_data(query:str = Query(..., description="User query string")):
     # Python logic or function call here
 
-    query = input.query_user
     inputs = tokenizer(query, return_tensors='pt', padding=True, truncation=True)
     
     with torch.no_grad():
@@ -43,7 +58,7 @@ def get_data(input:UserQuery):
             "fields": [ "text" ]
             }
         # Perform the kNN search and print the results
-        response = es.search(index='embedding_index_poc2', body=search)
+        response = es.search(index='embedding_index_demo_include_vignette', body=search)
         print(response)
     case_list = []
     
