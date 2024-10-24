@@ -64,7 +64,7 @@ lapply(pkgs, FUN = function(pkg) {
   # Find the file that matches the target path
   # We don't want subfolders in man/.
   # See https://github.com/epiverse-connect/epiverse-search/issues/22
-  matched_regex <- grep(file_paths, pattern = "^(man/[^/]*|vignettes/.*)$")
+  matched_regex <- grep(file_paths, pattern = "^(man/[^/]*|vignettes/.*\\.R?md)$")
   matching_files <- file_paths[matched_regex]
 
   # If matching files are found, download content of each file
