@@ -16,7 +16,7 @@ expect EpiNow2 in the top 5 results.
 
 ## Complex cases
 
-- For the query "Distribute the optimal way to distribute vaccine doses", we 
+- For the query "Determine the optimal way to distribute vaccine doses", we
 would like to get finalsize, odin, pomp.
 
 - For the query, "Estimate the dispersion parameter of an outbreak", we would
