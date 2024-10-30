@@ -1,5 +1,5 @@
 package_metadata <- httr2::request("https://epiverse-connect.r-universe.dev/api/packages") |>
-  httr2::req_user_agent("R-universe docs") |>
+  httr2::req_user_agent("epiverse-connect metadata collection script") |>
   httr2::req_perform() |>
   httr2::resp_body_json()
 
