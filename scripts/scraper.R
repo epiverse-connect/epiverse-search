@@ -49,6 +49,12 @@ pkgs <- ctv::read.ctv("Epidemiology.md") |>
 
 owner <- "cran"
 
+# Remove environmental epidemiology packages
+pkgs <- setdiff(
+  pkgs,
+  c("NADA", "EnvStats", "bkmr", "mediation", "mma", "HIMA")
+)
+
 # Vectorized approach to get title and description of each package
 lapply(pkgs, FUN = function(pkg) {
   # Use the gh function to list all files in the repository
