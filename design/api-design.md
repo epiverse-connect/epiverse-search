@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* API should be relatively easy to call (i.e., through a single GET/POST request)
+* API should be relatively easy to call (i.e., through a single GET request)
 * It should be reasonably responsive by default (<5s)
 * API returns JSON object
 * If the schema is expected to change a lot, versioned API routes would be preferable.
