@@ -44,8 +44,7 @@ download.file(ctv_url, output_file)
 
 # Read the CTV file and extract package names
 pkgs <- ctv::read.ctv("Epidemiology.md") |>
-  purrr::pluck("packagelist", "name") |>
-  tail(3)
+  purrr::pluck("packagelist", "name")
 
 owner <- "cran"
 
@@ -76,7 +75,7 @@ lapply(pkgs, FUN = function(pkg) {
   # If matching files are found, download content of each file
   if (length(matching_files) > 0) {
     filteredFiles <- Filter(function(x) x$type == "blob", files$tree[matched_regex])
-    lapply(filteredFiles, FUN = function (file) {
+    lapply(filteredFiles, FUN = function(file) {
       target_path <- sprintf("sources/%s/%s", pkg, file$path)
 
       # Use the gh function to get the blob content
@@ -96,10 +95,10 @@ lapply(pkgs, FUN = function(pkg) {
       # Save the .Rd content to a file with our helper function
       # The helper ensures the paths exist prior to saving
       tryCatch(write_content_to_file(file_content, target_path, is_binary),
-               error = function(e) {
-                 cat("Error downloading or saving file:", target_path, "\n")
-                 cat("Error message:", e$message, "\n")
-               }
+        error = function(e) {
+          cat("Error downloading or saving file:", target_path, "\n")
+          cat("Error message:", e$message, "\n")
+        }
       )
 
       if (!is_binary && grepl("\\.Rd$", target_path, ignore.case = TRUE)) {
@@ -111,10 +110,10 @@ lapply(pkgs, FUN = function(pkg) {
         )
         # Remove the original Rd file
         tryCatch(unlink(target_path),
-                 error = function(e) {
-                   cat("Error removing file:", target_path, "\n")
-                   cat("Error message:", e$message, "\n")
-                 }
+          error = function(e) {
+            cat("Error removing file:", target_path, "\n")
+            cat("Error message:", e$message, "\n")
+          }
         )
       }
 
