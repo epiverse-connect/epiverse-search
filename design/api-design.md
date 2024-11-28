@@ -6,6 +6,7 @@
 * It should be reasonably responsive by default (<5s)
 * API returns JSON object
 * If the schema is expected to change a lot, versioned API routes would be preferable.
+* Results are ordered by score by the backend and returned as ordered in the API answer
 
 ## Querying the API
 
