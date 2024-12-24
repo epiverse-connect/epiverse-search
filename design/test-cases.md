@@ -11,8 +11,14 @@ the top 5 results.
 - For the query "Estimate the case fatality ratio of a new pathogen", we expect
 cfr, coarseDataTools and maybe EpiNow2 in the top 5 results.
 
-- For the query "Forecast new cases of Covid-19 in the next two weeks", we 
+- For the query "Forecast new cases of Covid-19 in the next two weeks", we
 expect EpiNow2 in the top 5 results.
+
+- For the query "What are the parameters for certain disease", domain experts would like to get epiparameter
+
+- For the query "How to establish for risk fatality rate?", domain experts would like to get cfr
+
+- For the query "How to estimate excessive mortality?", domain experts would like to get Excessmort
 
 ## Complex cases
 
