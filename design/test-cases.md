@@ -18,7 +18,7 @@ expect EpiNow2 in the top 5 results.
 
 - For the query "How to establish for risk fatality rate?", domain experts would like to get cfr
 
-- For the query "How to estimate excessive mortality?", domain experts would like to get Excessmort
+- For the query "How to estimate excessive mortality?", domain experts would like to get excessmort
 
 ## Complex cases
 
