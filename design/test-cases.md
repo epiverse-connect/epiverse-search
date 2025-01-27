@@ -26,4 +26,4 @@ expect EpiNow2 in the top 5 results.
 would like to get finalsize, odin, pomp.
 
 - For the query, "Estimate the dispersion parameter of an outbreak", we would
-like to get bpmodels or modelSSE.
+like to get epichains or modelSSE.
