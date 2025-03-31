@@ -27,3 +27,10 @@ would like to get finalsize, odin, pomp.
 
 - For the query, "Estimate the dispersion parameter of an outbreak", we would
 like to get epichains or modelSSE.
+
+## Negative cases
+
+The search relevance threshold should be set such as:
+
+- For the query "Prepare the best guacamole", we expect no results
+
