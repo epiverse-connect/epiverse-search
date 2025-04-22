@@ -22,6 +22,8 @@ API calls are contained to one call per query. Front-end calls could look like `
     "results": [
       {
         "package": "epidemics",
+        "title": "Composable epidemic scenario modelling",
+        "description": "A library of compartmental epidemic models taken from the published literature, and classes to represent affected populations, public health response measures including non-pharmaceutical interventions on social contacts, non-pharmaceutical and pharmaceutical interventions that affect disease transmissibility, vaccination regimes, and disease seasonality, which can be combined to compose epidemic scenario models.",
         "logo": "https://epiverse-trace.github.io/epidemics/logo.svg",
         "website": "https://epiverse-trace.github.io/epidemics",
         "source": "https://github.com/epiverse-trace/epidemics",
@@ -33,6 +35,8 @@ API calls are contained to one call per query. Front-end calls could look like `
       },
       {
         "package": "finalsize",
+        "title": "Calculate the Final Size of an Epidemic",
+        "description": "Calculate the final size of a susceptible-infectious-recovered epidemic in a population with demographic variation in contact patterns and susceptibility to disease, as discussed in Miller (2012)",
         "logo": "https://epiverse-trace.github.io/finalsize/logo.svg",
         "website": "https://epiverse-trace.github.io/finalsize",
         "source": "https://github.com/epiverse-trace/finalsize",
