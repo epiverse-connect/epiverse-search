@@ -51,3 +51,5 @@ API calls are contained to one call per query. Front-end calls could look like `
   }
 }
 ```
+
+Empty strings should be presented as `null` (for example, for logo) and empty arrays as `[]` (for example, for vignettes).
