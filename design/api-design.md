@@ -53,3 +53,5 @@ API calls are contained to one call per query. Front-end calls could look like `
 ```
 
 Empty strings should be presented as `null` (for example, for logo) and empty arrays as `[]` (for example, for vignettes).
+
+URLs may be normalized by removing any superfluous characters around a valid URL. For example, if the package metadata includes the URL `<https://github.com/.../...>` the backend may (but is not expected to) normalize to `https://github.com/.../...`.
